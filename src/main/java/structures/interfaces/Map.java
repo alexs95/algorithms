@@ -2,35 +2,35 @@ package structures.interfaces;
 
 public interface Map<K, V> {
   /**
-   * Associates the specified value with the specified key in this map.
+   * Associates the specified value with this key in the map.
    *
-   * @param key   to be inserted.
-   * @param value to be inserted.
-   * @return previous value mapped to key, or null.
+   * @param key to be inserted.
+   * @param value to be associated with the key.
+   * @return the previous value mapped to key, or null.
    */
   public V put(K key, V value);
 
   /**
-   * Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+   * Returns the value for which this key is mapped, or null if the map contains no mapping.
    *
    * @param key to retrieve value for.
-   * @return value mapped to key or null.
+   * @return the value mapped to key, or null.
    */
   public V get(K key);
 
   /**
-   * Removes the mapping for the specified key.
+   * Removes the value mapping for the specified key.
    *
    * @param key to remove from the map.
-   * @return value mapped to key, or null.
+   * @return the value that was mapped to key, or null.
    */
   public V remove(K key);
 
   /**
-   * Returns true if this map contains a mapping for the specified key.
+   * Returns true if the map contains a mapping for the key.
    *
    * @param key to locate in the map.
-   * @return true if this map contains a mapping for the specified key.
+   * @return true if this map contains a mapping for the key.
    */
   public boolean contains(K key);
 
@@ -42,14 +42,14 @@ public interface Map<K, V> {
   public boolean isEmpty();
 
   /**
-   * Number of key-value pairs in the hash map.
+   * Returns the number of key-value pairs in the map.
    *
-   * @return number of key-value pairs.
+   * @return the number of key-value pairs.
    */
   public int size();
 
   /**
-   * Clear the map.
+   * Removes all mappings from the map.
    */
   public void clear();
 }
