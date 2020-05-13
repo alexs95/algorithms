@@ -1,7 +1,8 @@
 package structures;
 
 import structures.interfaces.Map;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HashMap<K, V> implements Map<K, V> {
   private int minimumSize = 1024;
@@ -75,13 +76,13 @@ public class HashMap<K, V> implements Map<K, V> {
   }
 
   public ArrayList<K> keys() {
-    ArrayList<K> ks = new ArrayList<>();
+    ArrayList<K> keys = new ArrayList<>();
     for (List<Pair<K, V>> entry : entries) {
       for (Pair<K, V> element : entry) {
-        ks.add(element.getKey());
+        keys.add(element.getKey());
       }
     }
-    return ks;
+    return keys;
   }
 
   @Override
@@ -103,11 +104,13 @@ public class HashMap<K, V> implements Map<K, V> {
   public String toString() {
     StringBuilder output = new StringBuilder("{\n");
     for (List<Pair<K, V>> entry : entries) {
-      for (Pair<K, V> element : entry) {
-        output.append("  " + element.getKey() + ": " + element.getValue() + "\n");
+      if (!entry.isEmpty()) {
+        for (Pair<K, V> element : entry) {
+          output.append("  " + element.getKey() + ": " + element.getValue() + "\n");
+        }
       }
-      output.append("\n}");
     }
+    output.append("}");
 
     return output.toString();
   }
@@ -120,9 +123,9 @@ public class HashMap<K, V> implements Map<K, V> {
     this.size = 0;
   }
 
-  private void resize(int size) {
+  private void resize(int length) {
     List<Pair<K, V>>[] cache = this.entries;
-    initialize(size);
+    initialize(length);
 
     for (List<Pair<K, V>> entry : cache) {
       for (Pair<K, V> element : entry) {
