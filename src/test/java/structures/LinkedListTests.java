@@ -59,4 +59,9 @@ class LinkedListTests {
     list.add(1);
     assertTrue(list.contains(1));
   }
+
+  @Test
+  void get() {
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(100));
+  }
 }
