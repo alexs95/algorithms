@@ -1,6 +1,7 @@
 package structures.interfaces;
 
 public interface Map<K, V> {
+
   /**
    * Associates the specified value with this key in the map.
    *

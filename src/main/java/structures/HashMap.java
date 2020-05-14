@@ -16,7 +16,7 @@ public class HashMap<K, V> implements Map<K, V> {
   }
 
   private int hash(K element) {
-    return element.hashCode() & (entries.length - 1);
+    return element.hashCode() % (entries.length - 1);
   }
 
   @Override
