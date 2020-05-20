@@ -32,7 +32,22 @@ public class LinkedList<T> implements List<T> {
   }
 
   @Override
-  public boolean add(T element) {
+  public T set(int index, T element) {
+    if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
+
+    int target = 0;
+    Node<T> node = head;
+    while(target != index) {
+      node = node.next;
+    }
+    T prev = node.value;
+    node.value = element;
+
+    return prev;
+  }
+
+  @Override
+  public void add(T element) {
     Node<T> node = new Node<>(element);
 
     if (head == null) {
@@ -42,8 +57,6 @@ public class LinkedList<T> implements List<T> {
     }
     tail = node;
     size++;
-
-    return true;
   }
 
   @Override
@@ -78,19 +91,30 @@ public class LinkedList<T> implements List<T> {
 
   @Override
   public boolean contains(T element) {
+    return indexOf(element) >= 0;
+  }
+
+  @Override
+  public int indexOf(T element) {
+    int index = 0;
     Node<T> node = head;
     while (node != null) {
       if (node.value.equals(element)) {
-        return true;
+        return index;
       }
       node = node.next;
     }
-    return false;
+    return -1;
   }
 
   @Override
   public int size() {
     return size;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return size == 0;
   }
 
   @Override
