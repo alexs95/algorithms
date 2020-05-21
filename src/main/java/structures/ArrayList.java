@@ -78,7 +78,7 @@ public class ArrayList<T> implements List<T> {
         return index;
       }
     }
-    returnsrc/main/java/structures/ArrayList.java -1;
+    return -1;
   }
 
   @Override
