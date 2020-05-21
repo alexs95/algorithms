@@ -42,18 +42,16 @@ public class Stack<T> implements structures.interfaces.Stack<T> {
   }
 
   @Override
-  public int search(T element) {
-    if (top == null) return -1;
+  public boolean contains(T element) {
+    if (top == null) return false;
 
     Node<T> node = top;
-    int index = 0;
     while (node != null) {
-      if (node.value.equals(element)) return index;
+      if (node.value.equals(element)) return true;
       node = node.next;
-      index++;
     }
 
-    return -1;
+    return false;
   }
 
   @Override

@@ -11,11 +11,11 @@ public interface List<T> {
   public T get(int index);
 
   /**
-   * Replaces the element at the specified position in this list with the specified element.
+   * Replaces the element at the given index with the given element.
    *
    * @param index of the element to replace.
-   * @param element to be stored at the specified position
-   * @return the element at index in the list.
+   * @param element to be stored at index.
+   * @return the previous element at index in the list.
    */
   public T set(int index, T element);
 
@@ -56,9 +56,9 @@ public interface List<T> {
   public void clear();
 
   /**
-   * Returns the number of elements in this list.
+   * Returns the number of elements in the list.
    *
-   * @return the number of elements in this list.
+   * @return the number of elements in the list.
    */
   public int size();
 

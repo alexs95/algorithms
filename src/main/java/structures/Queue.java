@@ -48,17 +48,15 @@ public class Queue<T> implements structures.interfaces.Queue<T> {
   }
 
   @Override
-  public int search(T value) {
-    if (head == null) return -1;
+  public boolean contains(T value) {
+    if (head == null) return false;
 
     Node<T> node = head;
-    int index = 0;
     while (node != null) {
-      if (node.value.equals(value)) return index;
+      if (node.value.equals(value)) return true;
       node = node.next;
-      index++;
     }
-    return -1;
+    return false;
   }
 
   @Override

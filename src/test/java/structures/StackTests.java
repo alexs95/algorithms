@@ -45,9 +45,9 @@ class StackTests {
   }
 
   @Test
-  void search() {
-    assertEquals(0, stack.search(3));
-    assertEquals(2, stack.search(1));
-    assertEquals(-1, stack.search(100));
+  void contains() {
+    assertTrue(stack.contains(3));
+    assertTrue(stack.contains(1));
+    assertFalse(stack.contains(100));
   }
 }

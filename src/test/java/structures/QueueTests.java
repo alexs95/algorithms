@@ -34,8 +34,8 @@ class QueueTests {
   }
 
   @Test
-  void search() {
-    assertEquals(-1, queue.search(4));
-    assertEquals(1, queue.search(2));
+  void contains() {
+    assertFalse(queue.contains(4));
+    assertTrue(queue.contains(2));
   }
 }

@@ -3,6 +3,14 @@ package structures.interfaces;
 public interface Map<K, V> {
 
   /**
+   * Returns the value for which this key is mapped, or null if the map contains no mapping.
+   *
+   * @param key to retrieve value for.
+   * @return the value mapped to key, or null.
+   */
+  public V get(K key);
+
+  /**
    * Associates the specified value with this key in the map.
    *
    * @param key to be inserted.
@@ -12,35 +20,25 @@ public interface Map<K, V> {
   public V put(K key, V value);
 
   /**
-   * Returns the value for which this key is mapped, or null if the map contains no mapping.
+   * Removes the key-value pair for the specified key.
    *
-   * @param key to retrieve value for.
-   * @return the value mapped to key, or null.
-   */
-  public V get(K key);
-
-  /**
-   * Removes the value mapping for the specified key.
-   *
-   * @param key to remove from the map.
+   * @param key of the pair to remove from the map.
    * @return the value that was mapped to key, or null.
    */
   public V remove(K key);
 
   /**
-   * Returns true if the map contains a mapping for the key.
+   * Returns true if the map contains a value for the given key.
    *
-   * @param key to locate in the map.
-   * @return true if this map contains a mapping for the key.
+   * @param key to search for.
+   * @return true if this map contains a value for the key.
    */
   public boolean contains(K key);
 
   /**
-   * Returns true if this map contains no key-value mappings.
-   *
-   * @return true if this map contains no key-value mappings.
+   * Removes all mappings from the map.
    */
-  public boolean isEmpty();
+  public void clear();
 
   /**
    * Returns the number of key-value pairs in the map.
@@ -50,7 +48,9 @@ public interface Map<K, V> {
   public int size();
 
   /**
-   * Removes all mappings from the map.
+   * Tests if there are any key-value pairs in the list.
+   *
+   * @return true if the map contains no key-value pairs.
    */
-  public void clear();
+  public boolean isEmpty();
 }
