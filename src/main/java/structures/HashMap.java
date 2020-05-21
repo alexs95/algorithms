@@ -1,37 +1,51 @@
 package structures;
 
 import structures.interfaces.Map;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class HashMap<K, V> implements Map<K, V> {
   private int minimumSize = 1024;
   private int loadFactor = 10;
 
-  private List<Pair<K, V>>[] entries;
+  private Node<K, V>[] entries;
   private int size;
 
   public HashMap() {
     initialize(minimumSize);
   }
 
-  private int hash(K element) {
-    return element.hashCode() % (entries.length - 1);
+  // private int hash(K key) {
+  //   int code = key.hashCode();
+  //   return code ^ code >>> 16;
+  // }
+
+  private int hash(K key) {
+    return key.hashCode() % (entries.length - 1);
   }
 
   @Override
   public V put(K key, V value) {
-    List<Pair<K, V>> entry = entries[hash(key)];
+    Node<K, V> curr = entries[hash(key)];
+    Node<K, V> tail = curr;
 
-    for (Pair<K, V> element : entry) {
-      if (element.getKey().equals(key)) {
-        V prev = element.getValue();
-        element.setValue(value);
-        return prev;
+    if (curr != null) {
+      while(curr != null) {
+        if (curr.key.equals(key)) {
+          V prev = curr.value;
+          curr.value = value;
+          return prev;
+        }
+        tail = curr;
+        curr = curr.next;
       }
-    }
 
-    entry.add(new Pair<>(key, value));
+      tail.next = new Node<>(key, value);
+    } else {
+      entries[hash(key)] = new Node<>(key, value);
+    }
     size++;
 
     if (size >= loadFactor * entries.length) {
@@ -43,9 +57,11 @@ public class HashMap<K, V> implements Map<K, V> {
 
   @Override
   public V get(K key) {
-    for (Pair<K, V> element : entries[hash(key)]) {
-      if (element.getKey().equals(key))
-        return element.getValue();
+    Node<K, V> element = entries[hash(key)];
+
+    while(element != null) {
+      if (element.key.equals(key)) return element.value;
+      element = element.next;
     }
 
     return null;
@@ -53,10 +69,17 @@ public class HashMap<K, V> implements Map<K, V> {
 
   @Override
   public V remove(K key) {
-    List<Pair<K, V>> entry = entries[hash(key)];
-    for (Pair<K, V> element : entry) {
-      if (element.getKey().equals(key)) {
-        entry.remove(element);
+    Node<K, V> prev = entries[hash(key)];
+    Node<K, V> curr = prev.next;
+
+    if (prev.key.equals(key)) {
+      prev.next = curr != null ? curr.next : null;
+      size--;
+    }
+
+    while(curr != null) {
+      if (curr.key.equals(key)) {
+        prev.next = curr.next;
         size--;
 
         int reducedSize = entries.length / 4;
@@ -64,9 +87,13 @@ public class HashMap<K, V> implements Map<K, V> {
           resize(reducedSize);
         }
 
-        return element.getValue();
+        return curr.value;
       }
+
+      prev = curr;
+      curr = curr.next;
     }
+
     return null;
   }
 
@@ -77,11 +104,14 @@ public class HashMap<K, V> implements Map<K, V> {
 
   public ArrayList<K> keys() {
     ArrayList<K> keys = new ArrayList<>();
-    for (List<Pair<K, V>> entry : entries) {
-      for (Pair<K, V> element : entry) {
-        keys.add(element.getKey());
+
+    for (Node<K, V> element : entries) {
+      while(element != null) {
+        keys.add(element.key);
+        element = element.next;
       }
     }
+
     return keys;
   }
 
@@ -100,37 +130,49 @@ public class HashMap<K, V> implements Map<K, V> {
     initialize(minimumSize);
   }
 
-  @Override
-  public String toString() {
-    StringBuilder output = new StringBuilder("{\n");
-    for (List<Pair<K, V>> entry : entries) {
-      if (!entry.isEmpty()) {
-        for (Pair<K, V> element : entry) {
-          output.append("  " + element.getKey() + ": " + element.getValue() + "\n");
-        }
-      }
-    }
-    output.append("}");
+  // @Override
+  // public String toString() {
+  //   StringBuilder output = new StringBuilder("{\n");
+  //   for (List<Node<K, V>> entry : entries) {
+  //     if (!entry.isEmpty()) {
+  //       for (Node<K, V> element : entry) {
+  //         output.append("  " + element.key + ": " + element.value + "\n");
+  //       }
+  //     }
+  //   }
+  //   output.append("}");
 
-    return output.toString();
-  }
+  //   return output.toString();
+  // }
 
+  @SuppressWarnings("unchecked")
   private void initialize(int length) {
-    entries = new ArrayList[length];
-    for (int i = 0; i < entries.length; i++ ) {
-      entries[i] = new ArrayList<>();
-    }
+    entries = (Node<K, V>[]) Array.newInstance(Node.class, length);
     this.size = 0;
   }
 
   private void resize(int length) {
-    List<Pair<K, V>>[] cache = this.entries;
+    Node<K, V>[] prev = this.entries;
     initialize(length);
 
-    for (List<Pair<K, V>> entry : cache) {
-      for (Pair<K, V> element : entry) {
-        this.put(element.getKey(), element.getValue());
+    for (Node<K, V> entry : prev) {
+      Node<K, V> element = entry;
+      while(element != null) {
+        this.put(element.key, element.value);
+        element = element.next;
       }
+    }
+  }
+
+  private static class Node<K, V> {
+    private Node<K, V> next;
+    private K key;
+    private V value;
+
+    private Node(K key, V value) {
+      this.key = key;
+      this.value = value;
+      this.next = null;
     }
   }
 }
