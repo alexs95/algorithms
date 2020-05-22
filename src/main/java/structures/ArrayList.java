@@ -63,14 +63,6 @@ public class ArrayList<T> implements List<T> {
     return element;
   }
 
-  public boolean contains(T value) {
-    for (int index = 0; index < size; index++) {
-      T element = array[index];
-      if (element.equals(value)) return true;
-    }
-    return false;
-  }
-
   @Override
   public int indexOf(T element) {
     for (int index = 0; index < size; index++) {

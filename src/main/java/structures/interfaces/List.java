@@ -35,14 +35,6 @@ public interface List<T> {
   public boolean remove(T element);
 
   /**
-   * Returns true if the list contains element.
-   *
-   * @param element to search for.
-   * @return true if the list contains element.
-   */
-  public boolean contains(T element);
-
-  /**
    * Returns the index of the first occurrence of element in this list, or -1 if not present.
    *
    * @param element to search for.
@@ -69,4 +61,3 @@ public interface List<T> {
    */
   public boolean isEmpty();
 }
-

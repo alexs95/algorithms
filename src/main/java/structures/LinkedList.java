@@ -15,7 +15,7 @@ public class LinkedList<T> implements List<T> {
 
   @Override
   public T get(int index) {
-    if (index >= size) throw new IndexOutOfBoundsException();
+    if (index >= size) throw new IndexOutOfBoundsException(index);
 
     Node<T> node = head;
     int current = 0;
@@ -87,11 +87,6 @@ public class LinkedList<T> implements List<T> {
     head = null;
     tail = null;
     size = 0;
-  }
-
-  @Override
-  public boolean contains(T element) {
-    return indexOf(element) >= 0;
   }
 
   @Override
