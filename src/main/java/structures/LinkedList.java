@@ -35,10 +35,11 @@ public class LinkedList<T> implements List<T> {
   public T set(int index, T element) {
     if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
 
-    int target = 0;
+    int curr = 0;
     Node<T> node = head;
-    while(target != index) {
+    while(node != null && curr != index) {
       node = node.next;
+      curr++;
     }
     T prev = node.value;
     node.value = element;
@@ -72,7 +73,7 @@ public class LinkedList<T> implements List<T> {
     while(node != null) {
       prev = node;
       node = node.next;
-      if (node.value.equals(element)) {
+      if (node != null && node.value.equals(element)) {
         prev.next = node.next;
         size--;
         return true;
