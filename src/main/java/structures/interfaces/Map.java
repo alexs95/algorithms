@@ -31,7 +31,7 @@ public interface Map<K, V> {
    * Returns true if the map contains a value for the given key.
    *
    * @param key to search for.
-   * @return true if this map contains a value for the key.
+   * @return true if this map contains a value for the given key.
    */
   public boolean contains(K key);
 

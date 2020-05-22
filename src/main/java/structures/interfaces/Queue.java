@@ -27,7 +27,7 @@ public interface Queue<T> {
   public T peek();
 
   /**
-   * Returns true if the queue contains element.
+   * Returns true if the queue contains the given element.
    *
    * @param element to search for.
    * @return true if the queue contains element.

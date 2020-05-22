@@ -8,7 +8,7 @@ public interface Stack<T> {
   /**
    * Pushes element on top of the stack.
    *
-   * @param element argument.
+   * @param element to push into the stack.
    * @return the element pushed.
    */
   public T push(T element);
@@ -28,7 +28,7 @@ public interface Stack<T> {
   public T peek();
 
   /**
-   * Returns true if the stack contains element.
+   * Returns true if the stack contains the given element.
    *
    * @param element to search for.
    * @return true if the stack contains element.

@@ -7,6 +7,7 @@ public interface List<T> {
    *
    * @param index of the element to return.
    * @return the element at index in the list.
+   * @throws IndexOutOfBoundsException if index < 0 or index >= size.
    */
   public T get(int index);
 
@@ -16,6 +17,7 @@ public interface List<T> {
    * @param index of the element to replace.
    * @param element to be stored at index.
    * @return the previous element at index in the list.
+   * @throws IndexOutOfBoundsException if index < 0 or index >= size.
    */
   public T set(int index, T element);
 
