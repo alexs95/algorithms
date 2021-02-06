@@ -12,7 +12,7 @@ public interface List<T> {
   public T get(int index);
 
   /**
-   * Replaces the element at the given index with the given element.
+   * Replaces at the given index with the given element.
    *
    * @param index of the element to replace.
    * @param element to be stored at index.
@@ -29,7 +29,7 @@ public interface List<T> {
   public void add(T element);
 
   /**
-   * Removes the first occurrence of element from the list, if it is present.
+   * Removes the first occurrence of element in the list, if it is present.
    *
    * @param element to be removed from the list.
    * @return true if the list changed as a result of this call.

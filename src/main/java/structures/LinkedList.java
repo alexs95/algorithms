@@ -15,7 +15,7 @@ public class LinkedList<T> implements List<T> {
 
   @Override
   public T get(int index) {
-    if (index >= size) throw new IndexOutOfBoundsException(index);
+    if (index < 0 || index >= size) throw new IndexOutOfBoundsException(index);
 
     Node<T> node = head;
     int current = 0;
@@ -99,6 +99,7 @@ public class LinkedList<T> implements List<T> {
         return index;
       }
       node = node.next;
+      index += 1;
     }
     return -1;
   }

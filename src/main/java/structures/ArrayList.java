@@ -49,7 +49,7 @@ public class ArrayList<T> implements List<T> {
 
     T element = array[index];
     if (index != --size) {
-      // Shift the elements to remove the gap caused by removal
+      // Shift the elements to remove the gap caused by a removal
       System.arraycopy(array, index + 1, array, index, size - index);
     }
     array[size] = null;
